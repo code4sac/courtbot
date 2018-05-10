@@ -1,6 +1,5 @@
 var crypto = require('crypto');
-var Knex = require('knex');
-var knex = Knex.initialize({
+var knex = require('knex')({
   client: 'pg',
   connection: process.env.HEROKU_POSTGRESQL_NAVY_URL
 });
@@ -26,7 +25,7 @@ exports.fuzzySearch = function(str, callback) {
 
   // Limit to ten results
   query = query.limit(10);
-  query.exec(callback);
+  query.then(callback);
 };
 
 exports.addReminder = function(data, callback) {

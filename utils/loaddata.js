@@ -6,9 +6,9 @@ var request = require('request');
 var parse = require('csv-parse');
 var Promise = require('bluebird');
 var sha1 = require('sha1');
+var dotenv = require('dotenv').config();
 
-var Knex = require('knex');
-var knex = Knex.initialize({
+var knex = require('knex')({
   client: 'pg',
   connection: process.env.HEROKU_POSTGRESQL_NAVY_URL
 });

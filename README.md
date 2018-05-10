@@ -36,6 +36,14 @@ To start the web service:
 foreman start
 ```
 
+## Docker it locally
+Or docker it:
+
+```console
+docker-compose up
+```
+
+
 ## Deploying to Heroku
 
 First, get a twilio account and auth token as described above. Then:

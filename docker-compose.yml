@@ -1,0 +1,34 @@
+version: '3.2'
+services:
+  pg:
+     image: postgres
+     environment:
+       - HEROKU_POSTGRESQL_NAVY_URL=nanananan
+       - POSTGRES_PASSWORD=password1
+       - POSTGRES_USER=courtbot
+     ports:
+       - "5432:5432"
+     #volumes:
+     #- ./db-init-scripts:/docker-entrypoint-initdb.d
+     #   - ../backup/backup/backups:/backups/
+  courtbot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - type: bind
+        source: ./app
+        target: /app/app
+    ports:
+      - "5000:5000"
+    environment:
+      DECLARE_LOCATION: 'Roseville'
+      COOKIE_SECRET: 'supply_a_real_value'
+      DATABASE_URL: postgres://username:pgpassword@127.0.0.1:5432/mydatabase
+    command: [ "npm", "start" ]
+    depends_on:
+      - pg
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
+

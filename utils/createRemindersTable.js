@@ -1,7 +1,6 @@
 // Creates the reminders table.
-var Knex = require('knex');
 
-var knex = Knex.initialize({
+var knex = require('knex')({
   client: 'pg',
   connection: process.env.HEROKU_POSTGRESQL_NAVY_URL
 });
