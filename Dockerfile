@@ -17,9 +17,12 @@ COPY . .
 
 ENV DECLARE_LOCATION="Sacramento"
 
-RUN node utils/createQueuedTable.js
-RUN node utils/createRemindersTable.js
-RUN node utils/loaddata.js
+#RUN node utils/createQueuedTable.js
+#RUN node utils/createRemindersTable.js
+#RUN node utils/loaddata.js
 
+# debugging
+RUN apt-get update
+RUN apt-get install -y postgresql-client
 EXPOSE 8080
 CMD [ "npm", "start" ]

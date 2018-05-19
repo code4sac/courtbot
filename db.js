@@ -1,9 +1,9 @@
 var crypto = require('crypto');
+  connection: process.env.HEROKU_POSTGRESQL_NAVY_URL
 var knex = require('knex')({
   client: 'pg',
   connection: process.env.HEROKU_POSTGRESQL_NAVY_URL
 });
-
 exports.findCitation = function(citation, callback) {
   // Postgres JSON search based on prebuilt index
   citation = escapeSQL(citation.toUpperCase());

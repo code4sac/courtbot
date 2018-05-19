@@ -1,16 +1,32 @@
 version: '3.2'
 services:
-  pg:
+  db:
      image: postgres
      environment:
-       - HEROKU_POSTGRESQL_NAVY_URL=nanananan
-       - POSTGRES_PASSWORD=password1
+       #- POSTGRES_PASSWORD=password1
        - POSTGRES_USER=courtbot
+       - POSTGRES_DB=courtbot
      ports:
-       - "5432:5432"
+       - "54320:5432"
      #volumes:
      #- ./db-init-scripts:/docker-entrypoint-initdb.d
      #   - ../backup/backup/backups:/backups/
+  courtbot-setup:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - type: bind
+        source: ./app
+        target: /app/app
+    environment:
+      DECLARE_LOCATION: 'Roseville'
+      COOKIE_SECRET: 'supply_a_real_value'
+      DATABASE_URL: postgres://courtbot:password1@db:5432/courtbot
+      HEROKU_POSTGRESQL_NAVY_URL: postgres://courtbot:password1@db:5432/courtbot
+    command: [ "node", "utils/index.js" ]
+    # createQueuedTable.js" ]
+
   courtbot:
     build:
       context: .
@@ -24,10 +40,11 @@ services:
     environment:
       DECLARE_LOCATION: 'Roseville'
       COOKIE_SECRET: 'supply_a_real_value'
-      DATABASE_URL: postgres://username:pgpassword@127.0.0.1:5432/mydatabase
+      DATABASE_URL: postgres://courtbot:password1@db:5432/courtbot
+      HEROKU_POSTGRESQL_NAVY_URL: postgres://courtbot:password1@db:5432/courtbot
     command: [ "npm", "start" ]
     depends_on:
-      - pg
+      - db
     volumes:
       - .:/usr/app/
       - /usr/app/node_modules
