@@ -1,3 +1,3 @@
-require ('createQueuedTable.js');
-require ('createRemindersTable.js');
-require ('loaddata.js');
+require ('./createQueuedTable.js');
+require ('./createRemindersTable.js');
+require ('./loaddata.js');

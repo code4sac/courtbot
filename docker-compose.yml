@@ -24,8 +24,10 @@ services:
       COOKIE_SECRET: 'supply_a_real_value'
       DATABASE_URL: postgres://courtbot:password1@db:5432/courtbot
       HEROKU_POSTGRESQL_NAVY_URL: postgres://courtbot:password1@db:5432/courtbot
+    depends_on:
+      - db
     command: [ "node", "utils/index.js" ]
-    # createQueuedTable.js" ]
+    # utils/createQueuedTable.js" ]
 
   courtbot:
     build:

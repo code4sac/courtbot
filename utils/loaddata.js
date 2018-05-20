@@ -18,7 +18,7 @@ var loadData = function () {
   var url = 'http://courtview.atlantaga.gov/courtcalendars/' + 
     'court_online_calendar/codeamerica.' + yesterday + '.csv';
 
-  console.log('Downloading latest CSV file...');
+  console.log('Downloading latest CSV file...', url);
   request.get(url, function(req, res) {
     console.log('Parsing CSV File...');
     parse(res.body, { delimiter: '|', quote: false, escape: false }, function(err, rows) {

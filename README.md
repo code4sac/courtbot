@@ -67,3 +67,8 @@ heroku open
 Finally, you'll want to setup scheduler to run the various tasks each day. Here's the recommended config:
 
 ![scheduler settings](https://cloud.githubusercontent.com/assets/1435836/4785655/2893dd9a-5d83-11e4-9618-d743bee27d2f.png)
+
+
+Currently docker-compose up runs the setup image to set up the database.
+Running:  http://localhost:5000/cases?q=bob starts to execute and takes errors in the logs.  The browser never completes the fetch because the file isn't getting downloaded?  Security perhaps?
+
